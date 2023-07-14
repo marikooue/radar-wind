@@ -1,0 +1,47 @@
+!    -*- f90 -*-
+! Note: the context of this file is case sensitive.
+
+python module _background ! in 
+    interface  ! in :_background
+        subroutine wind_cost(u,v,w,ub,vb,wb,wgt_ub,wgt_vb,wgt_wb,fill_value,proc,nx,ny,nz,jb,jb_grid) ! in :_background:_background.f90
+            real(kind=8) dimension(nz,ny,nx),intent(in) :: u
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: v
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: w
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: ub
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: vb
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: wb
+            real(kind=8) intent(in) :: wgt_ub
+            real(kind=8) intent(in) :: wgt_vb
+            real(kind=8) intent(in) :: wgt_wb
+            real(kind=8) intent(in) :: fill_value
+            integer(kind=4) intent(in) :: proc
+            integer(kind=4), optional,intent(in),check(shape(u,2)==nx),depend(u) :: nx=shape(u,2)
+            integer(kind=4), optional,intent(in),check(shape(u,1)==ny),depend(u) :: ny=shape(u,1)
+            integer(kind=4), optional,intent(in),check(shape(u,0)==nz),depend(u) :: nz=shape(u,0)
+            real(kind=8) intent(out) :: jb
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: jb_grid
+        end subroutine wind_cost
+        subroutine wind_grad(u,v,w,ub,vb,wb,wgt_ub,wgt_vb,wgt_wb,fill_value,proc,nx,ny,nz,djbdu,djbdv,djbdw) ! in :_background:_background.f90
+            real(kind=8) dimension(nz,ny,nx),intent(in) :: u
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: v
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: w
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: ub
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: vb
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: wb
+            real(kind=8) intent(in) :: wgt_ub
+            real(kind=8) intent(in) :: wgt_vb
+            real(kind=8) intent(in) :: wgt_wb
+            real(kind=8) intent(in) :: fill_value
+            integer(kind=4) intent(in) :: proc
+            integer(kind=4), optional,intent(in),check(shape(u,2)==nx),depend(u) :: nx=shape(u,2)
+            integer(kind=4), optional,intent(in),check(shape(u,1)==ny),depend(u) :: ny=shape(u,1)
+            integer(kind=4), optional,intent(in),check(shape(u,0)==nz),depend(u) :: nz=shape(u,0)
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: djbdu
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: djbdv
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: djbdw
+        end subroutine wind_grad
+    end interface 
+end python module _background
+
+! This file was auto-generated with f2py (version:2).
+! See http://cens.ioc.ee/projects/f2py2e/
