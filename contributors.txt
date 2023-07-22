@@ -1,3 +1,4 @@
-Kirk North <kirk.north@mail.mcgill.ca> (Admin)
+Mariko Oue <mariko.oue@stonybrook.edu> (Admin)
+Kirk North <kirk.north@mail.mcgill.ca> (Contributor)
 Paloma Borque <paloma.borque@mail.mcgill.ca> (Contributor)
-Pavlos Kollias <pavlos.kollias@mcgill.ca> (Supervisor)
+Pavlos Kollias <pavlos.kollias@stonybrook.edu> (Supervisor)

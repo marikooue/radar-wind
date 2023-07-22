@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 
 """
-The McGill Clouds module for computing Velocity Azimuth Displays (VADs) from
-scanning cloud and weather radars.
+The multi-Doppler radar wind retrieval module for computing 3D wind scanning cloud and weather radars.
 
 """
 
