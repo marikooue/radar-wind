@@ -112,8 +112,8 @@ class Solver(object):
         self.finite_order = finite_order
         self.proc = proc
         self.adv_flag = adv_flag
-        self.use_weights = use_weights
-        self.min_weight = min_weight
+	self.use_weights = use_weights
+	self.min_weight = min_weight
 
         # Fill value attribute
         if fill_value is None:
@@ -160,14 +160,11 @@ class Solver(object):
 
         # Parse solver target time, defined as the half-way time between the
         # earliest grid start and latest grid end
-        #self.time_target = datetimes_from_grid(grids[0]).min()
-        #self.time_start = datetimes_from_grid(grids[0]).min()
-        #self.time_end = datetimes_from_grid(grids[0]).max()
-        self.time_target = min(datetimes_from_grid(grids[0]))
-        self.time_start = min(datetimes_from_grid(grids[0]))
-        self.time_end = max(datetimes_from_grid(grids[0]))
+        self.time_target = datetimes_from_grid(grids[0]).min()
+        self.time_start = datetimes_from_grid(grids[0]).min()
+        self.time_end = datetimes_from_grid(grids[0]).max()
         if verbose:
-            print('Solver target time: {}'.format(self.time_target))
+            print 'Solver target time: {}'.format(self.time_target)
 
         # Parse minimizaton method
         if isinstance(self.method, str):
@@ -278,7 +275,7 @@ class Solver(object):
         self.N = self.nz * self.ny * self.nx
         self.functional_size = self.controls * self.N
         if verbose:
-            print('Functional size: {}'.format(self.functional_size))
+            print 'Functional size: {}'.format(self.functional_size)
         return
 
 

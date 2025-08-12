@@ -104,7 +104,7 @@ class Profile(object):
     def compute_rates(self):
         """ Compute the rate of change with respect to altitude. """
 
-        for attr, data in list(self.__dict__.items()):
+        for attr, data in self.__dict__.items():
 
             # Check if attribute is a measurement
             if attr != 'alt' and isinstance(data, np.ndarray):
@@ -189,17 +189,17 @@ class Profile(object):
             fill_value = get_fillvalue()
 
         # Parse grid dimensions
-        if (len(grid.fields[list(grid.fields.keys())[0]]['data'].shape)==2): #added by oue RHI grid X-Z plane
-            nz,  nx = grid.fields[list(grid.fields.keys())[0]]['data'].shape
-            ny=1
-        else:
-            nz, ny, nx = grid.fields[list(grid.fields.keys())[0]]['data'].shape
+	if (len(grid.fields[grid.fields.keys()[0]]['data'].shape)==2): #added by oue RHI grid X-Z plane
+		nz,  nx = grid.fields[grid.fields.keys()[0]]['data'].shape
+		ny=1
+	else:
+        	nz, ny, nx = grid.fields[grid.fields.keys()[0]]['data'].shape
 
         # Parse grid resolutions
         dx, dy, dz = common.parse_grid_resolution(
             grid, check_uniform=True, debug=debug, verbose=verbose)
 
-        for attr, data in list(self.__dict__.items()):
+        for attr, data in self.__dict__.items():
 
             # Ignore altitude and rate of change attributes
             if attr == 'alt' or 'dz' in attr:

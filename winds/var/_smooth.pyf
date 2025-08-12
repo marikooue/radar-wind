@@ -5,35 +5,35 @@ python module _smooth ! in
     interface  ! in :_smooth
         subroutine potvin_cost(d2udx2,d2udy2,d2udz2,d2vdx2,d2vdy2,d2vdz2,d2wdx2,d2wdy2,d2wdz2,wgt_s1,wgt_s2,wgt_s3,wgt_s4,fill_value,nx,ny,nz,js,js_grid) ! in :_smooth:_smooth.f90
             real(kind=8) dimension(nz,ny,nx),intent(in) :: d2udx2
-            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: d2udy2
-            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: d2udz2
-            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: d2vdx2
-            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: d2vdy2
-            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: d2vdz2
-            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: d2wdx2
-            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: d2wdy2
-            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: d2wdz2
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(ny,nz,nx) :: d2udy2
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(ny,nz,nx) :: d2udz2
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(ny,nz,nx) :: d2vdx2
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(ny,nz,nx) :: d2vdy2
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(ny,nz,nx) :: d2vdz2
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(ny,nz,nx) :: d2wdx2
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(ny,nz,nx) :: d2wdy2
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(ny,nz,nx) :: d2wdz2
             real(kind=8) intent(in) :: wgt_s1
             real(kind=8) intent(in) :: wgt_s2
             real(kind=8) intent(in) :: wgt_s3
             real(kind=8) intent(in) :: wgt_s4
             real(kind=8) intent(in) :: fill_value
-            integer(kind=4), optional,intent(in),check(shape(d2udx2,2)==nx),depend(d2udx2) :: nx=shape(d2udx2,2)
-            integer(kind=4), optional,intent(in),check(shape(d2udx2,1)==ny),depend(d2udx2) :: ny=shape(d2udx2,1)
-            integer(kind=4), optional,intent(in),check(shape(d2udx2,0)==nz),depend(d2udx2) :: nz=shape(d2udx2,0)
+            integer(kind=4), optional,intent(in),check(shape(d2udx2, 2) == nx),depend(d2udx2) :: nx=shape(d2udx2, 2)
+            integer(kind=4), optional,intent(in),check(shape(d2udx2, 1) == ny),depend(d2udx2) :: ny=shape(d2udx2, 1)
+            integer(kind=4), optional,intent(in),check(shape(d2udx2, 0) == nz),depend(d2udx2) :: nz=shape(d2udx2, 0)
             real(kind=8) intent(out) :: js
-            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: js_grid
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(ny,nz,nx) :: js_grid
         end subroutine potvin_cost
         subroutine potvin_grad(d2udx2,d2udy2,d2udz2,d2vdx2,d2vdy2,d2vdz2,d2wdx2,d2wdy2,d2wdz2,wgt_s1,wgt_s2,wgt_s3,wgt_s4,dx,dy,dz,finite_order,fill_value,nx,ny,nz,djsdu,djsdv,djsdw) ! in :_smooth:_smooth.f90
             real(kind=8) dimension(nz,ny,nx),intent(in) :: d2udx2
-            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: d2udy2
-            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: d2udz2
-            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: d2vdx2
-            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: d2vdy2
-            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: d2vdz2
-            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: d2wdx2
-            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: d2wdy2
-            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: d2wdz2
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(ny,nz,nx) :: d2udy2
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(ny,nz,nx) :: d2udz2
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(ny,nz,nx) :: d2vdx2
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(ny,nz,nx) :: d2vdy2
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(ny,nz,nx) :: d2vdz2
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(ny,nz,nx) :: d2wdx2
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(ny,nz,nx) :: d2wdy2
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(ny,nz,nx) :: d2wdz2
             real(kind=8) intent(in) :: wgt_s1
             real(kind=8) intent(in) :: wgt_s2
             real(kind=8) intent(in) :: wgt_s3
@@ -43,15 +43,16 @@ python module _smooth ! in
             real(kind=8) intent(in) :: dz
             character*16 intent(in) :: finite_order
             real(kind=8) intent(in) :: fill_value
-            integer(kind=4), optional,intent(in),check(shape(d2udx2,2)==nx),depend(d2udx2) :: nx=shape(d2udx2,2)
-            integer(kind=4), optional,intent(in),check(shape(d2udx2,1)==ny),depend(d2udx2) :: ny=shape(d2udx2,1)
-            integer(kind=4), optional,intent(in),check(shape(d2udx2,0)==nz),depend(d2udx2) :: nz=shape(d2udx2,0)
-            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: djsdu
-            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: djsdv
-            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: djsdw
+            integer(kind=4), optional,intent(in),check(shape(d2udx2, 2) == nx),depend(d2udx2) :: nx=shape(d2udx2, 2)
+            integer(kind=4), optional,intent(in),check(shape(d2udx2, 1) == ny),depend(d2udx2) :: ny=shape(d2udx2, 1)
+            integer(kind=4), optional,intent(in),check(shape(d2udx2, 0) == nz),depend(d2udx2) :: nz=shape(d2udx2, 0)
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(ny,nz,nx) :: djsdu
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(ny,nz,nx) :: djsdv
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(ny,nz,nx) :: djsdw
         end subroutine potvin_grad
     end interface 
 end python module _smooth
 
-! This file was auto-generated with f2py (version:2).
-! See http://cens.ioc.ee/projects/f2py2e/
+! This file was auto-generated with f2py (version:2.2.4).
+! See:
+! https://web.archive.org/web/20140822061353/http://cens.ioc.ee/projects/f2py2e

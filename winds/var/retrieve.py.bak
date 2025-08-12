@@ -72,7 +72,7 @@ def solve_wind_field(
     if isinstance(grids, Grid):
         grids = [grids]
     if verbose:
-        print('Number of input grids: {}'.format(len(grids)))
+        print 'Number of input grids: {}'.format(len(grids))
 
     # Parse solver
     if solver is None:
@@ -136,7 +136,7 @@ def solve_wind_field(
 
     # Compute radar observation weights
     if not np.all([solver.vdop_weight_field in grid.fields for grid in grids]):
-        print('Computing grid_radial_velocity_weight')
+	print 'Computing grid_radial_velocity_weight'
         common.add_grid_radial_velocity_weight(
             grids, solver, use_weights=solver.use_weights, debug=debug, verbose=verbose, **kwargs)
 
@@ -157,7 +157,7 @@ def solve_wind_field(
     if solver.first_pass:
 
         if verbose:
-            print('Performing heavily-smoothed first pass')
+            print 'Performing heavily-smoothed first pass'
 
         # The first pass is meant to retrieve the large-scale horizontal wind
         # flow. This means that we want to ignore mass continuity and set the
@@ -226,17 +226,6 @@ def solve_wind_field(
     if legacy:
         axes = common._populate_legacy_axes(grids)
         conv = Grid.from_legacy_parameters(fields, axes, metadata)
-    else:
-        time = grids[0].time
-        origin_latitude = grids[0].origin_latitude
-        origin_longitude = grids[0].origin_longitude
-        origin_altitude = grids[0].origin_altitude
-        x = grids[0].x
-        y = grids[0].y
-        z = grids[0].z
-        conv=Grid(time, fields, metadata,
-                   origin_latitude, origin_longitude, origin_altitude,
-                   x, y, z);
 
     # Compute the horizontal wind divergence field
     common.add_wind_divergence(conv, solver, debug=debug, verbose=verbose)

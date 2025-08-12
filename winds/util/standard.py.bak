@@ -10,7 +10,7 @@ this module relies on the U.S. Standard Atmosphere model.
 import numpy as np
 import pandas as pd
 
-from io import StringIO
+from StringIO import StringIO
 from scipy.interpolate import UnivariateSpline
 
 from ..core import Profile
@@ -102,9 +102,9 @@ def atmosphere(grid=None, debug=False, verbose=False):
         alt = alt_grid
 
     if debug:
-        print('First level temperature: {:2f} deg C'.format(tdry[0]))
-        print('First level pressure: {:.2f} kPa'.format(pres[0]))
-        print('First level air density: {:.2f} kg/m^3'.format(rho[0]))
+        print 'First level temperature: {:2f} deg C'.format(tdry[0])
+        print 'First level pressure: {:.2f} kPa'.format(pres[0])
+        print 'First level air density: {:.2f} kg/m^3'.format(rho[0])
 
     # Define zero wind fields as default
     wspd = np.zeros_like(tdry, subok=False)

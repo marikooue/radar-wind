@@ -41,15 +41,12 @@ def parse_grid_resolution(
     """
 
     # Compute coordinate differences
-    #dx = np.diff(grid.axes['x_disp']['data'], n=1)
-    #dy = np.diff(grid.axes['y_disp']['data'], n=1)
-    #dz = np.diff(grid.axes['z_disp']['data'], n=1)
-    dx = np.diff(grid.x['data'], n=1)
-    dy = np.diff(grid.y['data'], n=1)
-    dz = np.diff(grid.z['data'], n=1)
+    dx = np.diff(grid.axes['x_disp']['data'], n=1)
+    dy = np.diff(grid.axes['y_disp']['data'], n=1)
+    dz = np.diff(grid.axes['z_disp']['data'], n=1)
     #- added by oue for RHI grid (X-Z plane)
-    if (len(grid.x['data'])==1):
-        dy = np.diff(grid.y['data'], n=0)
+    if (len(grid.axes['y_disp']['data'])==1):
+	dy = np.diff(grid.axes['y_disp']['data'], n=0)
     #---
     if check_uniform:
         # Check for variable grid resolutions
@@ -64,8 +61,8 @@ def parse_grid_resolution(
         dz = dz[0]
 
         if verbose:
-            print('x-dimension resolution: {:.2f} m'.format(dx))
-            print('y-dimension resolution: {:.2f} m'.format(dy))
-            print('z-dimension resolution: {:.2f} m'.format(dz))
+            print 'x-dimension resolution: {:.2f} m'.format(dx)
+            print 'y-dimension resolution: {:.2f} m'.format(dy)
+            print 'z-dimension resolution: {:.2f} m'.format(dz)
 
     return dx, dy, dz

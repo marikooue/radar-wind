@@ -11,71 +11,72 @@ python module _operators ! in
             character*16 intent(in) :: finite_order
             real(kind=8) intent(in) :: fill_value
             integer(kind=4) intent(in) :: proc
-            integer(kind=4), optional,intent(in),check(shape(f,2)==nx),depend(f) :: nx=shape(f,2)
-            integer(kind=4), optional,intent(in),check(shape(f,1)==ny),depend(f) :: ny=shape(f,1)
-            integer(kind=4), optional,intent(in),check(shape(f,0)==nz),depend(f) :: nz=shape(f,0)
-            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: dfdx
-            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: dfdy
-            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: dfdz
+            integer(kind=4), optional,intent(in),check(shape(f, 2) == nx),depend(f) :: nx=shape(f, 2)
+            integer(kind=4), optional,intent(in),check(shape(f, 1) == ny),depend(f) :: ny=shape(f, 1)
+            integer(kind=4), optional,intent(in),check(shape(f, 0) == nz),depend(f) :: nz=shape(f, 0)
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nx,nz,ny) :: dfdx
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nx,nz,ny) :: dfdy
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nx,nz,ny) :: dfdz
         end subroutine gradient
         subroutine div_wind(u,v,w,dx,dy,dz,finite_order,fill_value,proc,nx,ny,nz,div,dudx,dvdy,dwdz) ! in :_operators:_operators.f90
             real(kind=8) dimension(nz,ny,nx),intent(in) :: u
-            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: v
-            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: w
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nx,nz,ny) :: v
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nx,nz,ny) :: w
             real(kind=8) intent(in) :: dx
             real(kind=8) intent(in) :: dy
             real(kind=8) intent(in) :: dz
             character*16 intent(in) :: finite_order
             real(kind=8) intent(in) :: fill_value
             integer(kind=4) intent(in) :: proc
-            integer(kind=4), optional,intent(in),check(shape(u,2)==nx),depend(u) :: nx=shape(u,2)
-            integer(kind=4), optional,intent(in),check(shape(u,1)==ny),depend(u) :: ny=shape(u,1)
-            integer(kind=4), optional,intent(in),check(shape(u,0)==nz),depend(u) :: nz=shape(u,0)
-            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: div
-            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: dudx
-            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: dvdy
-            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: dwdz
+            integer(kind=4), optional,intent(in),check(shape(u, 2) == nx),depend(u) :: nx=shape(u, 2)
+            integer(kind=4), optional,intent(in),check(shape(u, 1) == ny),depend(u) :: ny=shape(u, 1)
+            integer(kind=4), optional,intent(in),check(shape(u, 0) == nz),depend(u) :: nz=shape(u, 0)
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nx,nz,ny) :: div
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nx,nz,ny) :: dudx
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nx,nz,ny) :: dvdy
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nx,nz,ny) :: dwdz
         end subroutine div_wind
         subroutine div_horiz_wind(u,v,dx,dy,finite_order,fill_value,proc,nx,ny,nz,div,dudx,dvdy) ! in :_operators:_operators.f90
             real(kind=8) dimension(nz,ny,nx),intent(in) :: u
-            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: v
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nx,nz,ny) :: v
             real(kind=8) intent(in) :: dx
             real(kind=8) intent(in) :: dy
             character*16 intent(in) :: finite_order
             real(kind=8) intent(in) :: fill_value
             integer(kind=4) intent(in) :: proc
-            integer(kind=4), optional,intent(in),check(shape(u,2)==nx),depend(u) :: nx=shape(u,2)
-            integer(kind=4), optional,intent(in),check(shape(u,1)==ny),depend(u) :: ny=shape(u,1)
-            integer(kind=4), optional,intent(in),check(shape(u,0)==nz),depend(u) :: nz=shape(u,0)
-            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: div
-            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: dudx
-            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: dvdy
+            integer(kind=4), optional,intent(in),check(shape(u, 2) == nx),depend(u) :: nx=shape(u, 2)
+            integer(kind=4), optional,intent(in),check(shape(u, 1) == ny),depend(u) :: ny=shape(u, 1)
+            integer(kind=4), optional,intent(in),check(shape(u, 0) == nz),depend(u) :: nz=shape(u, 0)
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nx,nz,ny) :: div
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nx,nz,ny) :: dudx
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nx,nz,ny) :: dvdy
         end subroutine div_horiz_wind
         subroutine laplace_wind(u,v,w,dx,dy,dz,finite_order,fill_value,proc,nx,ny,nz,d2udx2,d2udy2,d2udz2,d2vdx2,d2vdy2,d2vdz2,d2wdx2,d2wdy2,d2wdz2) ! in :_operators:_operators.f90
             real(kind=8) dimension(nz,ny,nx),intent(in) :: u
-            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: v
-            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: w
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nx,nz,ny) :: v
+            real(kind=8) dimension(nz,ny,nx),intent(in),depend(nx,nz,ny) :: w
             real(kind=8) intent(in) :: dx
             real(kind=8) intent(in) :: dy
             real(kind=8) intent(in) :: dz
             character*16 intent(in) :: finite_order
             real(kind=8) intent(in) :: fill_value
             integer(kind=4) intent(in) :: proc
-            integer(kind=4), optional,intent(in),check(shape(u,2)==nx),depend(u) :: nx=shape(u,2)
-            integer(kind=4), optional,intent(in),check(shape(u,1)==ny),depend(u) :: ny=shape(u,1)
-            integer(kind=4), optional,intent(in),check(shape(u,0)==nz),depend(u) :: nz=shape(u,0)
-            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: d2udx2
-            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: d2udy2
-            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: d2udz2
-            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: d2vdx2
-            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: d2vdy2
-            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: d2vdz2
-            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: d2wdx2
-            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: d2wdy2
-            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: d2wdz2
+            integer(kind=4), optional,intent(in),check(shape(u, 2) == nx),depend(u) :: nx=shape(u, 2)
+            integer(kind=4), optional,intent(in),check(shape(u, 1) == ny),depend(u) :: ny=shape(u, 1)
+            integer(kind=4), optional,intent(in),check(shape(u, 0) == nz),depend(u) :: nz=shape(u, 0)
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nx,nz,ny) :: d2udx2
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nx,nz,ny) :: d2udy2
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nx,nz,ny) :: d2udz2
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nx,nz,ny) :: d2vdx2
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nx,nz,ny) :: d2vdy2
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nx,nz,ny) :: d2vdz2
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nx,nz,ny) :: d2wdx2
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nx,nz,ny) :: d2wdy2
+            real(kind=8) dimension(nz,ny,nx),intent(out),depend(nx,nz,ny) :: d2wdz2
         end subroutine laplace_wind
     end interface 
 end python module _operators
 
-! This file was auto-generated with f2py (version:2).
-! See http://cens.ioc.ee/projects/f2py2e/
+! This file was auto-generated with f2py (version:2.2.4).
+! See:
+! https://web.archive.org/web/20140822061353/http://cens.ioc.ee/projects/f2py2e

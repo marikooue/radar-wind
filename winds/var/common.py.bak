@@ -55,13 +55,13 @@ def add_grid_radial_velocity_weight(
 
         if verbose:
             grid_name = grid.metadata['radar_0_instrument_name']
-            print('Radial velocities from grid: {}'.format(grid_name))
+            print 'Radial velocities from grid: {}'.format(grid_name)
 
         if use_weights and solver.weight_field in grid.fields:
-            print('Weighting radial velocity: ',solver.weight_field)
+            print  'Weighting radial velocity: ',solver.weight_field
             weight = grid.fields[solver.weight_field]['data']
             #- modified by oue; for crsim (crsim might not have gqi_field)
-            weight[weight<solver.min_weight]=0.0
+	    weight[weight<solver.min_weight]=0.0
             #weight *= solver.lambda_o * grid.fields[solver.gqi_field]['data']
             if solver.gqi_field in grid.fields:
                 weight *= solver.lambda_o * grid.fields[solver.gqi_field]['data']
@@ -72,19 +72,19 @@ def add_grid_radial_velocity_weight(
             weight = np.zeros(solver.shape, dtype=np.float32)
             #weight = np.squeeze(weight) # added by oue for RHI grid X-Z plane
             weight.fill(solver.lambda_o)
-            print(use_weights)
+            print use_weights
 
         # Set radial velocity weight to zero where no radial velocity data is
         # available
         vdop = grid.fields[solver.vdop_field]['data']
-        if (len(vdop.shape)==2): # added by oue for RHI grid X-Z plane
-            vdop=np.expand_dims(vdop,axis=1)
+	if (len(vdop.shape)==2): # added by oue for RHI grid X-Z plane
+	    vdop=np.expand_dims(vdop,axis=1)
         weight[np.ma.getmaskarray(vdop)] = 0.0
-        weight[vdop<-200] = 0.0
+	weight[vdop<-200] = 0.0
 
         if debug:
-            print('Min radial velocity weight: {:.3f}'.format(weight.min()))
-            print('Max radial velocity weight: {:.3f}'.format(weight.max()))
+            print 'Min radial velocity weight: {:.3f}'.format(weight.min())
+            print 'Max radial velocity weight: {:.3f}'.format(weight.max())
 
         # Create new radial velocity weight field
         weight_dict = get_metadata(solver.vdop_weight_field)
@@ -139,13 +139,13 @@ def add_grid_network_reflectivity(
             continue
 
         if verbose:
-            print(('Reflectivity observations from grid: {}'.format(grid_name)))
+            print('Reflectivity observations from grid: {}'.format(grid_name))
 
         # Convert reflectivity data to linear units
         refl = np.ma.power(
             10.0, (grid.fields[solver.refl_field]['data'] / 10.0))
-        if(len(refl.shape)==2): # added by oue for RHI grid X-Z plane
-            refl=np.expand_dims(refl,axis=1)
+	if(len(refl.shape)==2): # added by oue for RHI grid X-Z plane
+	    refl=np.expand_dims(refl,axis=1)
         refl_data.append(refl)
 
         if use_weights and solver.weight_field in grid.fields:
@@ -156,8 +156,8 @@ def add_grid_network_reflectivity(
         weight_data.append(weight)
 
         if debug:
-            print('Min reflectivity weight: {:.3f}'.format(weight.min()))
-            print('Max reflectivity weight: {:.3f}'.format(weight.max()))
+            print 'Min reflectivity weight: {:.3f}'.format(weight.min())
+            print 'Max reflectivity weight: {:.3f}'.format(weight.max())
 
     # Compute weighted average of reflectivity data and convert reflectivity
     # back to decibel
@@ -167,8 +167,8 @@ def add_grid_network_reflectivity(
     refl.set_fill_value(solver.fill_value)
 
     if debug:
-        print('Min network reflectivity: {:.3f} dBZ'.format(refl.min()))
-        print('Max network reflectivity: {:.3f} dBZ'.format(refl.max()))
+        print 'Min network reflectivity: {:.3f} dBZ'.format(refl.min())
+        print 'Max network reflectivity: {:.3f} dBZ'.format(refl.max())
 
     # Create radar network reflectivity field dictionary
     refl_dict = get_metadata(solver.refl_field)
@@ -234,8 +234,8 @@ def add_fall_speed_caya(
     vfall = np.ma.filled(vfall, 0.0)
 
     if debug:
-        print('Min hydrometeor fall speed: {:.3f} m/s'.format(vfall.min()))
-        print('Max hydrometeor fall speed: {:.3f} m/s'.format(vfall.max()))
+        print 'Min hydrometeor fall speed: {:.3f} m/s'.format(vfall.min())
+        print 'Max hydrometeor fall speed: {:.3f} m/s'.format(vfall.max())
 
     # Create hydrometeor fall speed field dictionary
     vfall_dict = get_metadata(solver.fall_field)
@@ -321,7 +321,7 @@ def add_grid_coverage(grids, solver, atol=0.1, debug=False, verbose=False):
 
         if verbose:
             grid_name = grid.metadata['radar_0_instrument_name']
-            print('Coverage by grid: {}'.format(grid_name))
+            print 'Coverage by grid: {}'.format(grid_name)
 
         # Parse radial velocity weight data
         weight = grid.fields[solver.vdop_weight_field]['data']
@@ -332,8 +332,8 @@ def add_grid_coverage(grids, solver, atol=0.1, debug=False, verbose=False):
         nobs += significant.astype(np.int32)
 
     if debug:
-        print('Min radar coverage: {}'.format(nobs.min()))
-        print('Max radar coverage: {}'.format(nobs.max()))
+        print 'Min radar coverage: {}'.format(nobs.min())
+        print 'Max radar coverage: {}'.format(nobs.max())
 
     # Create new radar coverage field dictionary
     cover_dict = get_metadata(solver.cover_field)
@@ -382,8 +382,8 @@ def arm_mergesonde_profile(
     idx = np.abs(time_sonde - solver.time_target).argmin()
 
     if debug:
-        print('Solver target time: {}'.format(solver.time_target))
-        print('Sounding target time: {}'.format(time_sonde[idx]))
+        print 'Solver target time: {}'.format(solver.time_target)
+        print 'Sounding target time: {}'.format(time_sonde[idx])
 
     # Parse merged sounding data
     # Dry bulb temperature -> degrees Celsius
@@ -449,7 +449,7 @@ def _add_grid_line_sight_components(
 
         if verbose:
             grid_name = grid.metadata['radar_0_instrument_name']
-            print('Line-of-sight components for grid: {}'.format(grid_name))
+            print 'Line-of-sight components for grid: {}'.format(grid_name)
 
         # Parse geolocation data
         lat_0 = grid.origin_latitude['data'][0]
@@ -469,9 +469,9 @@ def _add_grid_line_sight_components(
         z_radar = alt_radar - alt_0
 
         if debug:
-            print('Radar x offset in grid: {:.3f} km'.format(x_radar / 1000.0))
-            print('Radar y offset in grid: {:.3f} km'.format(y_radar / 1000.0))
-            print('Radar z offset in grid: {:.3f} km'.format(z_radar / 1000.0))
+            print 'Radar x offset in grid: {:.3f} km'.format(x_radar / 1000.0)
+            print 'Radar y offset in grid: {:.3f} km'.format(y_radar / 1000.0)
+            print 'Radar z offset in grid: {:.3f} km'.format(z_radar / 1000.0)
 
         # Parse grid coordinates and change reference frame
         x = grid.x['data'] - x_radar
@@ -517,15 +517,15 @@ def _populate_legacy_axes(grids):
     """ Populate legacy axes data and metadata. """
 
     return {
-        'time': grids[0].time['data'],
-        'time_start': min(grids[0].time['data']),
-        'time_end': max(grids[0].time['data']),
-        'x_disp': grids[0].x['data'],
-        'y_disp': grids[0].y['data'],
-        'z_disp': grids[0].z['data'],
-        'alt': grids[0].point_altitude['data'],
-        'lat': grids[0].point_latitude['data'],
-        'lon': grids[0].point_longitude['data'],
+        'time': grids[0].axes['time'],
+        'time_start': grids[0].axes['time_start'],
+        'time_end': grids[0].axes['time_end'],
+        'x_disp': grids[0].axes['x_disp'],
+        'y_disp': grids[0].axes['y_disp'],
+        'z_disp': grids[0].axes['z_disp'],
+        'alt': grids[0].axes['alt'],
+        'lat': grids[0].axes['lat'],
+        'lon': grids[0].axes['lon'],
         }
 
 

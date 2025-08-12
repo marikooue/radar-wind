@@ -16,9 +16,9 @@ python module _continuity ! in
             real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: drhodz
             real(kind=8) intent(in) :: wgt_c
             real(kind=8) intent(in) :: fill_value
-            integer(kind=4), optional,intent(in),check(shape(u,2)==nx),depend(u) :: nx=shape(u,2)
-            integer(kind=4), optional,intent(in),check(shape(u,1)==ny),depend(u) :: ny=shape(u,1)
-            integer(kind=4), optional,intent(in),check(shape(u,0)==nz),depend(u) :: nz=shape(u,0)
+            integer(kind=4), optional,intent(in),check(shape(u, 2) == nx),depend(u) :: nx=shape(u, 2)
+            integer(kind=4), optional,intent(in),check(shape(u, 1) == ny),depend(u) :: ny=shape(u, 1)
+            integer(kind=4), optional,intent(in),check(shape(u, 0) == nz),depend(u) :: nz=shape(u, 0)
             real(kind=8) intent(out) :: jc
             real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: jc_grid
         end subroutine potvin_cost
@@ -39,9 +39,9 @@ python module _continuity ! in
             real(kind=8) intent(in) :: dz
             character*16 intent(in) :: finite_order
             real(kind=8) intent(in) :: fill_value
-            integer(kind=4), optional,intent(in),check(shape(u,2)==nx),depend(u) :: nx=shape(u,2)
-            integer(kind=4), optional,intent(in),check(shape(u,1)==ny),depend(u) :: ny=shape(u,1)
-            integer(kind=4), optional,intent(in),check(shape(u,0)==nz),depend(u) :: nz=shape(u,0)
+            integer(kind=4), optional,intent(in),check(shape(u, 2) == nx),depend(u) :: nx=shape(u, 2)
+            integer(kind=4), optional,intent(in),check(shape(u, 1) == ny),depend(u) :: ny=shape(u, 1)
+            integer(kind=4), optional,intent(in),check(shape(u, 0) == nz),depend(u) :: nz=shape(u, 0)
             real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: djcdu
             real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: djcdv
             real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: djcdw
@@ -59,9 +59,9 @@ python module _continuity ! in
             real(kind=8) intent(in) :: dz
             character*16 intent(in) :: scheme
             real(kind=8) intent(in) :: fill_value
-            integer(kind=4), optional,intent(in),check(shape(dudx,2)==nx),depend(dudx) :: nx=shape(dudx,2)
-            integer(kind=4), optional,intent(in),check(shape(dudx,1)==ny),depend(dudx) :: ny=shape(dudx,1)
-            integer(kind=4), optional,intent(in),check(shape(dudx,0)==nz),depend(dudx) :: nz=shape(dudx,0)
+            integer(kind=4), optional,intent(in),check(shape(dudx, 2) == nx),depend(dudx) :: nx=shape(dudx, 2)
+            integer(kind=4), optional,intent(in),check(shape(dudx, 1) == ny),depend(dudx) :: ny=shape(dudx, 1)
+            integer(kind=4), optional,intent(in),check(shape(dudx, 0) == nz),depend(dudx) :: nz=shape(dudx, 0)
             real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: w
         end subroutine anelastic_upwards
         subroutine anelastic_cost_trad(w,wc,wgt_c,fill_value,nx,ny,nz,jc,jc_grid) ! in :_continuity:_continuity.f90
@@ -69,9 +69,9 @@ python module _continuity ! in
             real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: wc
             real(kind=8) intent(in) :: wgt_c
             real(kind=8) intent(in) :: fill_value
-            integer(kind=4), optional,intent(in),check(shape(w,2)==nx),depend(w) :: nx=shape(w,2)
-            integer(kind=4), optional,intent(in),check(shape(w,1)==ny),depend(w) :: ny=shape(w,1)
-            integer(kind=4), optional,intent(in),check(shape(w,0)==nz),depend(w) :: nz=shape(w,0)
+            integer(kind=4), optional,intent(in),check(shape(w, 2) == nx),depend(w) :: nx=shape(w, 2)
+            integer(kind=4), optional,intent(in),check(shape(w, 1) == ny),depend(w) :: ny=shape(w, 1)
+            integer(kind=4), optional,intent(in),check(shape(w, 0) == nz),depend(w) :: nz=shape(w, 0)
             real(kind=8) intent(out) :: jc
             real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: jc_grid
         end subroutine anelastic_cost_trad
@@ -80,9 +80,9 @@ python module _continuity ! in
             real(kind=8) dimension(nz,ny,nx),intent(in),depend(nz,ny,nx) :: wc
             real(kind=8) intent(in) :: wgt_c
             real(kind=8) intent(in) :: fill_value
-            integer(kind=4), optional,intent(in),check(shape(w,2)==nx),depend(w) :: nx=shape(w,2)
-            integer(kind=4), optional,intent(in),check(shape(w,1)==ny),depend(w) :: ny=shape(w,1)
-            integer(kind=4), optional,intent(in),check(shape(w,0)==nz),depend(w) :: nz=shape(w,0)
+            integer(kind=4), optional,intent(in),check(shape(w, 2) == nx),depend(w) :: nx=shape(w, 2)
+            integer(kind=4), optional,intent(in),check(shape(w, 1) == ny),depend(w) :: ny=shape(w, 1)
+            integer(kind=4), optional,intent(in),check(shape(w, 0) == nz),depend(w) :: nz=shape(w, 0)
             real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: djcdu
             real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: djcdv
             real(kind=8) dimension(nz,ny,nx),intent(out),depend(nz,ny,nx) :: djcdw
@@ -90,5 +90,6 @@ python module _continuity ! in
     end interface 
 end python module _continuity
 
-! This file was auto-generated with f2py (version:2).
-! See http://cens.ioc.ee/projects/f2py2e/
+! This file was auto-generated with f2py (version:2.2.4).
+! See:
+! https://web.archive.org/web/20140822061353/http://cens.ioc.ee/projects/f2py2e

@@ -40,7 +40,7 @@ def _compute_wind_cost(x, grids, solver, profile, debug=False, verbose=False):
     solver.cost_iter += 1
 
     if verbose:
-        print('Cost iteration: {}'.format(solver.cost_iter))
+        print 'Cost iteration: {}'.format(solver.cost_iter)
 
     # Parse analysis domain parameters
     nz, ny, nx = solver.shape
@@ -108,7 +108,7 @@ def _compute_wind_cost(x, grids, solver, profile, debug=False, verbose=False):
 	# Compute Jo for the current grid (radar)
         Jo += 0.5 * np.sum(wgt_o * (vdop - vdop_obs)**2)
 	# Modified by oue 2017/01/06
-        Jo_grid += 0.5 * (wgt_o * (vdop - vdop_obs)**2)
+	Jo_grid += 0.5 * (wgt_o * (vdop - vdop_obs)**2)
     ##f = open("Jo.bin", "wb")
     ##Jo_grid.tofile(f)
     ##f.close()
@@ -158,7 +158,7 @@ def _compute_wind_cost(x, grids, solver, profile, debug=False, verbose=False):
             # Explicitly integrate the anelastic air mass continuity equation
             # upwards starting from a lower boundary (e.g., surface)
 	    # modified by oue  (20170112)
-            wc = _continuity.anelastic_upwards(
+	    wc = _continuity.anelastic_upwards(
                 dudx, dvdy, profile.rho, hdiv, profile.drhodx, profile.drhody, profile.drhodz,
                 dx=solver.dx, dy=solver.dy, dz=solver.dz,nx=solver.nx, ny=solver.ny, nz=solver.nz,
                 scheme='finite', fill_value=solver.fill_value)
@@ -247,12 +247,12 @@ def _compute_wind_cost(x, grids, solver, profile, debug=False, verbose=False):
     solver.cost_value.append(J)
 
     if verbose:
-        print('Radial velocity observation cost : {:1.5e}'.format(Jo))
-        print('Mass continuity cost ........... : {:1.5e}'.format(Jc))
-        print('Smoothness cost ................ : {:1.5e}'.format(Js))
-        print('Background field cost .......... : {:1.5e}'.format(Jb))
-        print('Surface impermeability cost .... : {:1.5e}'.format(Jp))
-        print('Total cost ..................... : {:1.5e}'.format(J))
+        print 'Radial velocity observation cost : {:1.5e}'.format(Jo)
+        print 'Mass continuity cost ........... : {:1.5e}'.format(Jc)
+        print 'Smoothness cost ................ : {:1.5e}'.format(Js)
+        print 'Background field cost .......... : {:1.5e}'.format(Jb)
+        print 'Surface impermeability cost .... : {:1.5e}'.format(Jp)
+        print 'Total cost ..................... : {:1.5e}'.format(J)
 
     return J
 
@@ -275,7 +275,7 @@ def _compute_wind_grad(x, grids, solver, profile, debug=False, verbose=False):
     solver.cost_grad_iter += 1
 
     if verbose:
-        print('Gradient iteration: {}'.format(solver.cost_grad_iter))
+        print 'Gradient iteration: {}'.format(solver.cost_grad_iter)
 
     # Parse analysis domain parameters
     nz, ny, nx = solver.shape
@@ -336,9 +336,9 @@ def _compute_wind_grad(x, grids, solver, profile, debug=False, verbose=False):
         vdop_obs = np.ma.getdata(grid.fields[solver.vdop_field]['data'])
         vfall = np.ma.getdata(grid.fields[solver.fall_field]['data'])
         wgt_o = np.ma.getdata(grid.fields[solver.vdop_weight_field]['data'])
-        if(len(vdop_obs.shape)==2): #added by oue for RHI grid X-Z plane
-            vdop_obs=np.expand_dims(vdop_obs,axis=1)
-            vfall=np.expand_dims(vfall,axis=1)
+	if(len(vdop_obs.shape)==2): #added by oue for RHI grid X-Z plane
+	    vdop_obs=np.expand_dims(vdop_obs,axis=1)
+	    vfall=np.expand_dims(vfall,axis=1)
         ic = np.ma.getdata(grid.fields[solver.xhat_field]['data'])
         jc = np.ma.getdata(grid.fields[solver.yhat_field]['data'])
         kc = np.ma.getdata(grid.fields[solver.zhat_field]['data'])
@@ -502,6 +502,6 @@ def _compute_wind_grad(x, grids, solver, profile, debug=False, verbose=False):
     solver.cost_grad_mag.append(mag)
 
     if verbose:
-        print('Magnitude of gradient: {:1.5e}'.format(mag))
+        print 'Magnitude of gradient: {:1.5e}'.format(mag)
 
     return grad

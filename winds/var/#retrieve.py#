@@ -231,7 +231,19 @@ def solve_wind_field(
         origin_latitude = grids[0].origin_latitude
         origin_longitude = grids[0].origin_longitude
         origin_altitude = grids[0].origin_altitude
-        x = grids[0].x
+        x=get_metadata('x')
+        x.['data'] = grids[0].x
+        x.['long_name'] = 'X distance on the projection plane from the origin'
+        x.['units'] = 'meters'
+        x.['standard_name']='projection_x_coordinate'
+        x.['axis']='X'
+        y=get_metadata('y')
+        y.['data'] = grids[0].x
+        y.['long_name']	= 'X distance on the projection plane from the origin'
+        y.['units'] = 'meters'
+        y.['standard_name']='projection_x_coordinate'
+        y.['axis']='X'
+
         y = grids[0].y
         z = grids[0].z
         conv=Grid(time, fields, metadata,

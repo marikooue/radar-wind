@@ -138,10 +138,10 @@ class Metric(object):
             max_idx = self.cost_value.argmax()
             min_cost = self.cost_value.min()
             max_cost = self.cost_value.max()
-            print('Min cost function index: {}'.format(min_idx))
-            print('Max cost function index: {}'.format(max_idx))
-            print('Min cost function value: {:.3e}'.format(min_cost))
-            print('Max cost function value: {:.3e}'.format(max_cost))
+            print 'Min cost function index: {}'.format(min_idx)
+            print 'Max cost function index: {}'.format(max_idx)
+            print 'Min cost function value: {:.3e}'.format(min_cost)
+            print 'Max cost function value: {:.3e}'.format(max_cost)
 
         # Value of cost function gradient magnitude as a function of iteration
         self.cost_grad_iter = np.arange(0, self.solver.cost_grad_iter)
@@ -152,10 +152,10 @@ class Metric(object):
             max_idx = self.cost_grad_mag.argmax()
             min_grad = self.cost_grad_mag.min()
             max_grad = self.cost_grad_mag.max()
-            print('Min cost gradient magnitude index: {}'.format(min_idx))
-            print('Max cost gradient magnitude index: {}'.format(max_idx))
-            print('Min cost gradient magnitude: {:.3e}'.format(min_grad))
-            print('Max cost gradient magnitude: {:.3e}'.format(max_grad))
+            print 'Min cost gradient magnitude index: {}'.format(min_idx)
+            print 'Max cost gradient magnitude index: {}'.format(max_idx)
+            print 'Min cost gradient magnitude: {:.3e}'.format(min_grad)
+            print 'Max cost gradient magnitude: {:.3e}'.format(max_grad)
 
         return
 
@@ -179,7 +179,7 @@ class Metric(object):
         """
 
         if verbose:
-            print('Computing mass continuity residual')
+            print 'Computing mass continuity residual'
 
         # Parse atmospheric state data
         rho = profile.rho
@@ -223,7 +223,7 @@ class Metric(object):
             alpha_profile = np.sqrt(np.mean(D**2 / norm, axis=(1, 2)))
 
         if verbose:
-            print('Relative mass continuity residual: {:.3f}'.format(alpha))
+            print 'Relative mass continuity residual: {:.3f}'.format(alpha)
 
         self.alpha = alpha
         self.alpha_profile = alpha_profile
@@ -250,7 +250,7 @@ class Metric(object):
         """
 
         if verbose:
-            print('Computing radar observation residuals')
+            print 'Computing radar observation residuals'
 
         # Parse analysis domain dimensions
         nz, ny, nx = self.solver.shape
@@ -265,9 +265,9 @@ class Metric(object):
             # Parse radar data
             vdop_obs = grid.fields[self.solver.vdop_field]['data']
             vfall = grid.fields[self.solver.fall_field]['data']
-            if(len(vdop_obs.shape)==2): #added by oue RHI grid X-Z plane
-                vdop_obs = np.expand_dims(vdop_obs,axis=1)
-                vfall = np.expand_dims(vfall,axis=1)
+	    if(len(vdop_obs.shape)==2): #added by oue RHI grid X-Z plane
+		vdop_obs = np.expand_dims(vdop_obs,axis=1)
+		vfall = np.expand_dims(vfall,axis=1)
             ic = grid.fields[self.solver.xhat_field]['data']
             jc = grid.fields[self.solver.yhat_field]['data']
             kc = grid.fields[self.solver.zhat_field]['data']
@@ -285,10 +285,10 @@ class Metric(object):
             rmse = np.ma.sqrt(np.ma.mean(bias**2))
 
             if verbose:
-                print('Grid instrument name: {}'.format(grid_name))
-                print('Observation MBE: {:.3f} m/s'.format(mbe))
-                print('Observation MAE: {:.3f} m/s'.format(mae))
-                print('Observation RMSE: {:.3f} m/s'.format(rmse))
+                print 'Grid instrument name: {}'.format(grid_name)
+                print 'Observation MBE: {:.3f} m/s'.format(mbe)
+                print 'Observation MAE: {:.3f} m/s'.format(mae)
+                print 'Observation RMSE: {:.3f} m/s'.format(rmse)
 
             # Compute residuals as a function of height
             bias = bias.reshape(nz, ny * nx)
@@ -327,7 +327,7 @@ class Metric(object):
         """
 
         if verbose:
-            print('Computing surface impermeability residual')
+            print 'Computing surface impermeability residual'
 
         # Compute surface impermeability residuals
         bias = self.w[0]
@@ -336,9 +336,9 @@ class Metric(object):
         rmse = np.sqrt(np.mean(bias**2))
 
         if verbose:
-            print('Impermeability MBE: {:.3f} m/s'.format(mbe))
-            print('Impermeability MAE: {:.3f} m/s'.format(mae))
-            print('Impermeability RMSE: {:.3f} m/s'.format(rmse))
+            print 'Impermeability MBE: {:.3f} m/s'.format(mbe)
+            print 'Impermeability MAE: {:.3f} m/s'.format(mae)
+            print 'Impermeability RMSE: {:.3f} m/s'.format(rmse)
 
         self.impermeability_mbe = mbe
         self.impermeability_mae = mae
